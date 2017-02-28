@@ -3,7 +3,7 @@
 open System
 open FSharp.Data
 
-type GenericScrapper() = 
+type GenericWebScrapper() = 
 
     // Loads HTML document
     member this.load(url: string) = HtmlDocument.Load(url)
@@ -18,7 +18,7 @@ type GenericScrapper() =
             )
 
     member this.ensureAbsoluteUrl(baseUrl: string, url: string) =
-        let uri = new Uri(url.TrimStart('/'), UriKind.RelativeOrAbsolute)
+        let uri = new Uri(url, UriKind.RelativeOrAbsolute)
         match uri.IsAbsoluteUri with
             | true -> url
             | false -> (new Uri(new Uri(baseUrl), url)).ToString()
