@@ -1,4 +1,6 @@
 ﻿namespace Lonsec.WebScrapper
+
+open System
 open FSharp.Data
 
 type GenericScrapper() = 
@@ -12,5 +14,11 @@ type GenericScrapper() =
             |> Seq.choose (fun x -> 
                 x.TryGetAttribute("href") 
                 |> Option.filter (fun a -> urlFilter(a.Value()))
-                |> Option.map (fun a -> x.InnerText(), a.Value())
+                |> Option.map (fun a -> x.InnerText(), this.ensureAbsoluteUrl(url, a.Value()))
             )
+
+    member this.ensureAbsoluteUrl(baseUrl: string, url: string) =
+        let uri = new Uri(url.TrimStart('/'), UriKind.RelativeOrAbsolute)
+        match uri.IsAbsoluteUri with
+            | true -> url
+            | false -> (new Uri(new Uri(baseUrl), url)).ToString()

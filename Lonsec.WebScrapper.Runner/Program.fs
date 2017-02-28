@@ -11,15 +11,12 @@ let main argv =
     let results = scrappy.loadLinks(url, (fun url -> url.Contains("/article/")))
     //printfn "%A" results
 
-    //results |> Seq.iter (fun 
-
-    // Get document content by root:
-    let docUrl = "http://www.morningstar.com.au/technicalanalysis/article/market-action-favours-financials-outperformance/8348"
-    let doc = scrappy.load(docUrl)
-    let rootContent = doc.CssSelect(".storyPageHolder") |> Seq.tryHead
-    if rootContent.IsSome then
-        printf "\n\n\n*******\n%s" (rootContent.Value.InnerText())
+    results |> Seq.iter (fun (text, href) ->
+        let doc = scrappy.load href
+        let rootContent = doc.CssSelect(".storyPageHolder") |> Seq.tryHead
+        if rootContent.IsSome then
+            printf "\n\n\n*******\n%s" (rootContent.Value.InnerText())
+    )
         
-
     System.Console.Read() |> ignore
     0
