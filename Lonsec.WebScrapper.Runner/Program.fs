@@ -8,9 +8,10 @@ open Lonsec.WebScrapper
 let main argv = 
 
     let extractor = new FrontpageExtractor("http://morningstar.com.au", 
-                                    ".storyPageHolder", 
-                                    (fun(url:string) -> url.Contains("/article/")), 
-                                    Path.GetTempPath() + "out\\")
+                        ".storyPageHolder", 
+                        (fun(url:string) -> url.Contains("/article/")), 
+                        Path.GetTempPath() + "out\\")
+
     extractor.extractAll()
     
     printf "Job done."     
