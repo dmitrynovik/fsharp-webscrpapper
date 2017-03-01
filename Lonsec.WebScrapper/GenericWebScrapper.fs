@@ -5,6 +5,12 @@ open FSharp.Data
 
 type GenericWebScrapper() = 
 
+    let ensureAbsoluteUrl(baseUrl: string, url: string) =
+        let uri = new Uri(url, UriKind.RelativeOrAbsolute)
+        match uri.IsAbsoluteUri with
+            | true -> url
+            | false -> (new Uri(new Uri(baseUrl), url)).ToString()
+
     // Loads HTML document
     member this.load(url: string) = HtmlDocument.Load(url)
 
@@ -14,11 +20,5 @@ type GenericWebScrapper() =
             |> Seq.choose (fun x -> 
                 x.TryGetAttribute("href") 
                 |> Option.filter (fun a -> urlFilter(a.Value()))
-                |> Option.map (fun a -> x.InnerText(), this.ensureAbsoluteUrl(url, a.Value()))
+                |> Option.map (fun a -> x.InnerText(), ensureAbsoluteUrl(url, a.Value()))
             )
-
-    member this.ensureAbsoluteUrl(baseUrl: string, url: string) =
-        let uri = new Uri(url, UriKind.RelativeOrAbsolute)
-        match uri.IsAbsoluteUri with
-            | true -> url
-            | false -> (new Uri(new Uri(baseUrl), url)).ToString()
