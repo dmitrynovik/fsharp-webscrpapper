@@ -12,18 +12,18 @@ let main argv =
     let scrappy = new GenericWebScrapper()
     let url = "http://morningstar.com.au"
     let outPath = Path.GetTempPath() + "out\\"
+    let newslinkSelector = fun (url:string) -> url.Contains("/article/")
+    let articleRootSelector = ".storyPageHolder"
 
-    // This example loads relevant links from document:
-    let documentLinks = scrappy.loadLinks(url, (fun url -> url.Contains("/article/")))
-    //printfn "%A" results
+    let documentLinks = scrappy.loadLinks(url, newslinkSelector)
 
     // TODO: how do we remove elements like .pagecount - ?
-    documentLinks |> Seq.iter (fun (text, href) ->
+    documentLinks |> Seq.iter (fun (linkText, href) ->
         let doc = scrappy.load href
-        let rootContent = doc.CssSelect(".storyPageHolder") |> Seq.tryHead
+        let rootContent = doc.CssSelect(articleRootSelector) |> Seq.tryHead
         if rootContent.IsSome then
             let writer = new DocumentWriter(scrappy, outPath)
-            writer.scrapDocumentFromLink(text, href)
+            writer.scrapDocumentFromLink(linkText, href)
     )
     
     printf "Job done."     
