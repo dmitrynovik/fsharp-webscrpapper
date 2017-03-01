@@ -55,6 +55,7 @@
     <Compile Include="DocumentWriter.fs" />
     <None Include="Script.fsx" />
     <Content Include="packages.config" />
+    <Compile Include="FrontpageExtractor.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Data">
