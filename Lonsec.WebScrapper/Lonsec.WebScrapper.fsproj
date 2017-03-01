@@ -57,6 +57,7 @@
     <Content Include="packages.config" />
     <Compile Include="SiteConfiguration.fs" />
     <Compile Include="FrontpageExtractor.fs" />
+    <Compile Include="SiteList.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Data">

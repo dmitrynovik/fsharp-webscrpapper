@@ -7,16 +7,12 @@ open Lonsec.WebScrapper
 [<EntryPoint>]
 let main argv = 
 
-    let siteSettings = { 
-        url = "http://morningstar.com.au";
-        articleRootSelector = ".storyPageHolder";
-        newslinkSelector = (fun(url:string) -> url.Contains("/article/"));
-        outPath = Path.GetTempPath() + "out\\";
-    }
-
-    let extractor = new FrontpageExtractor(siteSettings)
-    extractor.extractAll()
+    SiteList.all |> Seq.iter (fun siteSettings -> 
+        printf "processing %s" siteSettings.url 
+        let extractor = new FrontpageExtractor(siteSettings)
+        extractor.extractAll()
+    )
     
-    printf "Job done."     
+    printf "\n\nJob done."
     System.Console.Read() |> ignore
     0
