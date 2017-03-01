@@ -10,6 +10,7 @@ module SiteList =
             articleRootSelector = ".storyPageHolder";
             newslinkSelector = (fun(url:string) -> url.Contains("/article/"));
             outPath = Path.GetTempPath() + "out\\";
+            categories = [];
         }
     ]
 
