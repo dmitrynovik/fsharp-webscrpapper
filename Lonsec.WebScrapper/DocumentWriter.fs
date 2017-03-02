@@ -19,7 +19,7 @@ type DocumentWriter(scrappy: GenericWebScrapper, outPath: string) =
             if not (List.contains c badChars) then buf <- buf.Append c
         buf.ToString()
 
-    member this.scrapDocumentFromLink(text: string, href: string) =
+    member this.scrapDocumentFromLink(config: SiteConfiguration, text: string, href: string) =
         let doc = scrappy.load href
         let rootContent = doc.CssSelect(".storyPageHolder") |> Seq.tryHead
         if rootContent.IsSome then
