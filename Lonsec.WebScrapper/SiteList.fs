@@ -18,6 +18,13 @@ module SiteList =
             articleRootSelector = ".storyPageHolder";
             outPath = Path.GetTempPath() + "scrappy\\Morningstar\\Funds\\";
             categories = [{ name = "funds"; weight = 1.0 }];
-        }
+        };
+        { 
+            url = "http://moneymanagement.com.au/news";
+            newslinkSelector = (fun(url:string) -> url.Contains("/news/"));
+            articleRootSelector = ".cm-article-body";
+            outPath = Path.GetTempPath() + "scrappy\\Moneymanagement\\";
+            categories = [];
+        };
     |]
 

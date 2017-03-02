@@ -21,7 +21,7 @@ type DocumentWriter(scrappy: GenericWebScrapper, outPath: string) =
 
     member this.scrapDocumentFromLink(config: SiteConfiguration, text: string, href: string) =
         let doc = scrappy.load href
-        let rootContent = doc.CssSelect(".storyPageHolder") |> Seq.tryHead
+        let rootContent = doc.CssSelect(config.articleRootSelector) |> Seq.tryHead
         if rootContent.IsSome then
             let content = rootContent.Value.InnerText()
             File.WriteAllText (path + removeInvalidCharsFromFileName(text) + ".txt", content)

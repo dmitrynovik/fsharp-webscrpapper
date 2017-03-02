@@ -1,5 +1,7 @@
 ﻿namespace Lonsec.WebScrapper
 
+open System
+open System.Diagnostics
 open FSharp.Data
 
 type FrontpageExtractor(siteConfig: SiteConfiguration) = 
@@ -17,6 +19,8 @@ type FrontpageExtractor(siteConfig: SiteConfiguration) =
             let rootContent = doc.CssSelect(siteConfig.articleRootSelector) |> Seq.tryHead
             if rootContent.IsSome then
                 writer.scrapDocumentFromLink(siteConfig, linkText, href)
+            else
+                Trace.TraceError(String.Format("document root {0} not found in {1}", siteConfig.articleRootSelector, href))
         )
 
 
