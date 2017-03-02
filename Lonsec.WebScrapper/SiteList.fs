@@ -4,13 +4,20 @@ open System.IO
 
 module SiteList =
     
-    let all = [
+    let all = [|
         { 
             url = "http://morningstar.com.au";
-            articleRootSelector = ".storyPageHolder";
             newslinkSelector = (fun(url:string) -> url.Contains("/article/"));
-            outPath = Path.GetTempPath() + "out\\";
+            articleRootSelector = ".storyPageHolder";
+            outPath = Path.GetTempPath() + "scrappy\\Morningstar\\";
             categories = [];
+        };
+        { 
+            url = "http://morningstar.com.au/Funds";
+            newslinkSelector = (fun(url:string) -> url.Contains("/article/"));
+            articleRootSelector = ".storyPageHolder";
+            outPath = Path.GetTempPath() + "scrappy\\Morningstar\\Funds\\";
+            categories = [{ name = "funds"; weight = 1.0 }];
         }
-    ]
+    |]
 

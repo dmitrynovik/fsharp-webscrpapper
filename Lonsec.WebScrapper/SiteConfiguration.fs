@@ -7,9 +7,9 @@ type Classification = {
 
 type SiteConfiguration = {  
     url: string; 
-    articleRootSelector: string;
-    newslinkSelector: string -> bool; 
-    outPath: string;
     categories: seq<Classification>;
+    outPath: string;
+    newslinkSelector: string -> bool; 
+    articleRootSelector: string;
 }
 

@@ -8,7 +8,7 @@ open Lonsec.WebScrapper
 let main argv = 
 
     SiteList.all |> Seq.iter (fun siteSettings -> 
-        printf "processing %s" siteSettings.url 
+        printf "processing %s\n" siteSettings.url 
         let extractor = new FrontpageExtractor(siteSettings)
         extractor.extractAll()
     )

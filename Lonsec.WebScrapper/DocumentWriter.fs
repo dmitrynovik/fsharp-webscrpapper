@@ -10,6 +10,8 @@ type DocumentWriter(scrappy: GenericWebScrapper, outPath: string) =
     do
         if not (Directory.Exists outPath) then Directory.CreateDirectory(outPath) |> ignore
 
+    let path = if outPath.EndsWith("\\") then outPath else outPath + "\\"
+
     let removeInvalidCharsFromFileName(filename: string) = 
         let badChars = Path.GetInvalidFileNameChars() |> Seq.toList
         let mutable buf = new StringBuilder(filename.Length)
@@ -22,7 +24,7 @@ type DocumentWriter(scrappy: GenericWebScrapper, outPath: string) =
         let rootContent = doc.CssSelect(".storyPageHolder") |> Seq.tryHead
         if rootContent.IsSome then
             let content = rootContent.Value.InnerText()
-            File.WriteAllText (outPath + removeInvalidCharsFromFileName(text) + ".txt", content)
+            File.WriteAllText (path + removeInvalidCharsFromFileName(text) + ".txt", content)
             //printf "\n\n\n*******\n%s" content
 
     
