@@ -19,12 +19,8 @@ type DocumentWriter(scrappy: GenericWebScrapper, outPath: string) =
             if not (List.contains c badChars) then buf <- buf.Append c
         buf.ToString()
 
-    member this.scrapDocumentFromLink(config: SiteConfiguration, text: string, href: string) =
-        let doc = scrappy.load href
-        let rootContent = doc.CssSelect(config.articleRootSelector) |> Seq.tryHead
-        if rootContent.IsSome then
-            let content = rootContent.Value.InnerText()
-            File.WriteAllText (path + removeInvalidCharsFromFileName(text) + ".txt", content)
-            //printf "\n\n\n*******\n%s" content
+    member this.writeDocument(config: SiteConfiguration, name: string, doc: HtmlNode) =
+        let content = doc.InnerText()
+        File.WriteAllText (path + removeInvalidCharsFromFileName(name) + ".txt", content)
 
     
