@@ -9,9 +9,12 @@ let main argv =
         printf "processing %s\n" siteSettings.url 
         let extractor = new FrontpageExtractor(siteSettings)
         try
+            Console.ForegroundColor <- ConsoleColor.White
             extractor.extractAll()
         with
-            | err -> Trace.TraceError (err.ToString())
+            | err -> 
+                Console.ForegroundColor <- ConsoleColor.Red
+                Trace.TraceError (err.ToString())
     )
     
     printf "\n\nJob done."
