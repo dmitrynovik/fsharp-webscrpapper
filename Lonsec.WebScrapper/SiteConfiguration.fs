@@ -10,6 +10,6 @@ type SiteConfiguration = {
     categories: seq<Classification>;
     outPath: string;
     newslinkSelector: string -> bool; 
-    articleRootSelector: string;
+    articleRootSelectors: seq<string>;
 }
 

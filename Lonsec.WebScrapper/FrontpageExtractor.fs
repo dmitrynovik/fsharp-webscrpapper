@@ -16,9 +16,15 @@ type FrontpageExtractor(siteConfig: SiteConfiguration) =
         // TODO: how do we remove elements like .pagecount - ?
         documentLinks |> Seq.iter (fun (linkText, href) ->
             let doc = scrappy.load href
-            let rootContent = doc.CssSelect(siteConfig.articleRootSelector) |> Seq.tryHead
+            let rootContent = siteConfig.articleRootSelectors 
+                                |> Seq.map(fun selector -> doc.CssSelect(selector)) 
+                                |> Seq.concat 
+                                |> Seq.tryHead
+
             if rootContent.IsSome then
                 writer.writeDocument(siteConfig, linkText, rootContent.Value)
+            else
+                Trace.TraceWarning (String.Format("could not scrap {0}", href))
         )
 
 
