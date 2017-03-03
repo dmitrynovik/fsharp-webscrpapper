@@ -12,10 +12,9 @@ type FrontpageExtractor(siteConfig: SiteConfiguration) =
 
         let documentLinks = scrappy.loadLinks(siteConfig.url, siteConfig.newslinkSelector)
         let writer = new DocumentWriter(scrappy, siteConfig.outPath)
-        let mutable count = 0
 
         // TODO: how do we remove elements like .pagecount - ?
-        documentLinks |> Seq.iter (fun (linkText, href) ->
+        System.Threading.Tasks.Parallel.ForEach (documentLinks, fun (linkText, href) ->
             try
                 let doc = scrappy.load href
                 let rootContent = siteConfig.articleRootSelectors 
@@ -25,14 +24,12 @@ type FrontpageExtractor(siteConfig: SiteConfiguration) =
 
                 if rootContent.IsSome then
                     writer.writeDocument(siteConfig, linkText, rootContent.Value)
-                    count <- count + 1
                 else
                     Trace.TraceWarning (String.Format("could not scrap {0}", href))
             with
             | err -> 
                 Console.ForegroundColor <- ConsoleColor.Red
                 Trace.TraceError (err.ToString())
-        )
-        count
+        ) |> ignore
 
 

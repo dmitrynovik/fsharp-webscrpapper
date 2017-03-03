@@ -4,6 +4,8 @@ open Lonsec.WebScrapper
 
 [<EntryPoint>]
 let main argv = 
+    
+    let watch = Stopwatch.StartNew()
 
     Lonsec.WebScrapper.Runner.SiteList.all |> Seq.iter (fun siteSettings -> 
 
@@ -12,14 +14,15 @@ let main argv =
 
         let extractor = new FrontpageExtractor(siteSettings)
         try
-            let extracted = extractor.extractAll()
-            printf "\textracted: %d\n" extracted
+            extractor.extractAll() |> ignore
         with
             | err -> 
                 Console.ForegroundColor <- ConsoleColor.Red
                 Trace.TraceError (err.ToString())
     )
     
-    printf "\n\nJob done."
+    watch.Stop()
+    let time = watch.Elapsed.ToString()
+    printf "\n\nJob done, elapsed: %s" time  
     Console.Read() |> ignore
     0
