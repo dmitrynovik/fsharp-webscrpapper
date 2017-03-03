@@ -7,13 +7,13 @@ let main argv =
 
     Lonsec.WebScrapper.Runner.SiteList.all |> Seq.iter (fun siteSettings -> 
 
+        Console.ForegroundColor <- ConsoleColor.White
         printf "processing %s\n" siteSettings.url 
 
         let extractor = new FrontpageExtractor(siteSettings)
         try
-            Console.ForegroundColor <- ConsoleColor.White
             let extracted = extractor.extractAll()
-            Console.WriteLine("\textracted: {0}", extracted)
+            printf "\textracted: %d\n" extracted
         with
             | err -> 
                 Console.ForegroundColor <- ConsoleColor.Red
