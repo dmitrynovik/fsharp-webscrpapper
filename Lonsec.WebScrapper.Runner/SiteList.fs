@@ -97,5 +97,12 @@ module SiteList =
             outPath = Path.GetTempPath() + "scrappy\\investordaily.com.au\\mergers-acquisitions";
             categories = [{name = "mergers-acquisitions"; weight = 1.0}];
         };
+        {
+            url = "https://cuffelinks.com.au";
+            newslinkSelector = fun(url:string) -> true;
+            articleRootSelectors = [|"article"|];
+            outPath = Path.GetTempPath() + "scrappy\\cuffelinks.com.au\\";
+            categories = [];
+        };
     |]
 

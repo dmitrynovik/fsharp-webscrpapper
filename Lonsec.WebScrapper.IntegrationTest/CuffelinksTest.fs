@@ -4,14 +4,14 @@ open System.IO
 open NUnit.Framework
 
 [<TestFixture>]
-type InvestorDailyMarketsTest() = 
+type CuffelinksTest() = 
     inherit TestBase(
         {
-            url = "http://www.investordaily.com.au/markets";
+            url = "https://cuffelinks.com.au";
             newslinkSelector = fun(url:string) -> true;
             articleRootSelectors = [|"article"|];
-            outPath = Path.GetTempPath() + "scrappy\\investordaily.com.au\\Markets";
-            categories = [{name = "markets"; weight = 1.0}];
+            outPath = Path.GetTempPath() + "scrappy\\cuffelinks.com.au\\";
+            categories = [];
         })
 
         [<Test>]
