@@ -104,5 +104,12 @@ module SiteList =
             outPath = Path.GetTempPath() + "scrappy\\cuffelinks.com.au\\";
             categories = [];
         };
+        {
+            url = "http://www.triapartners.com/trialogue.php";
+            newslinkSelector = fun(url:string) -> true;
+            articleRootSelectors = [|".trialogue-details"|];
+            outPath = Path.GetTempPath() + "scrappy\\triapartners.com\\";
+            categories = [];
+        };
     |]
 

@@ -58,6 +58,7 @@
     <Content Include="App.config" />
     <Compile Include="InvestorDailyNewsTest.fs" />
     <Compile Include="CuffelinksTest.fs" />
+    <Compile Include="TriapartnersTest.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
