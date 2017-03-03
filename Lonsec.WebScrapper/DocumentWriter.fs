@@ -5,7 +5,7 @@ open System.IO
 open System.Text
 open FSharp.Data
 
-type DocumentWriter(scrappy: GenericWebScrapper, outPath: string) = 
+type DocumentWriter(scrappy: DocumentScrapper, outPath: string) = 
 
     do
         if not (Directory.Exists outPath) then Directory.CreateDirectory(outPath) |> ignore

@@ -6,7 +6,7 @@ open FSharp.Data
 
 type FrontpageExtractor(siteConfig: SiteConfiguration) = 
 
-    let scrappy = new GenericWebScrapper()
+    let scrappy = new DocumentScrapper()
 
     member this.extractAll() =
 

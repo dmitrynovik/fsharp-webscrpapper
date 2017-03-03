@@ -3,7 +3,7 @@
 open System
 open FSharp.Data
 
-type GenericWebScrapper() = 
+type DocumentScrapper() = 
 
     let ensureAbsoluteUrl(baseUrl: string, url: string) =
         let uri = new Uri(url, UriKind.RelativeOrAbsolute)
