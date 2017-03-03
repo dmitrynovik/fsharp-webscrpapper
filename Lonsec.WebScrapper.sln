@@ -7,6 +7,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Lonsec.WebScrapper", "Lonse
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Lonsec.WebScrapper.Runner", "Lonsec.WebScrapper.Runner\Lonsec.WebScrapper.Runner.fsproj", "{CD1553A8-39E9-4CD8-AD24-3735422F826B}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Lonsec.WebScrapper.IntegrationTest", "Lonsec.WebScrapper.IntegrationTest\Lonsec.WebScrapper.IntegrationTest.fsproj", "{5AB5C238-0541-443E-84E9-7CC053F0962C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{CD1553A8-39E9-4CD8-AD24-3735422F826B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD1553A8-39E9-4CD8-AD24-3735422F826B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD1553A8-39E9-4CD8-AD24-3735422F826B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AB5C238-0541-443E-84E9-7CC053F0962C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AB5C238-0541-443E-84E9-7CC053F0962C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AB5C238-0541-443E-84E9-7CC053F0962C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AB5C238-0541-443E-84E9-7CC053F0962C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

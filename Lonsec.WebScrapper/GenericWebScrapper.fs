@@ -16,7 +16,20 @@ type GenericWebScrapper() =
 
     // Loads links from the web document specified by URL and filtered by provided function:
     member this.loadLinks(url: string, urlFilter: string -> bool) =
-        this.load(url).Descendants["a"]
+
+        let doc = this.load(url)
+//        System.Diagnostics.Debug.WriteLine doc
+//
+//        let str = doc.ToString()
+//        let cleansed = System.Text.RegularExpressions.Regex.Replace(str, "\<\![^\-]+\-\-\>", "")
+//        doc <- HtmlDocument.Parse(cleansed) 
+
+        //System.Diagnostics.Debug.WriteLine doc
+        //let body = doc.CssSelect("body")
+
+        let hrefs = doc.Descendants["a"]
+
+        hrefs
             |> Seq.choose (fun x -> 
                 x.TryGetAttribute("href") 
                 |> Option.filter (fun a -> urlFilter(a.Value()))
