@@ -56,7 +56,9 @@
     <None Include="Script.fsx" />
     <Content Include="packages.config" />
     <Content Include="App.config" />
-    <Compile Include="InvestorDailyTest.fs" />
+    <Compile Include="InvestorDailyNewsTest.fs" />
+    <Compile Include="InvestorDailyMarketTest.fs" />
+    <Compile Include="InvestorDailyRegulationTest.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
