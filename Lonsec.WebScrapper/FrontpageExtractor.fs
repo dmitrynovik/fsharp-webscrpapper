@@ -2,6 +2,7 @@
 
 open System
 open System.Diagnostics
+open System.Threading.Tasks
 open FSharp.Data
 
 type FrontpageExtractor(siteConfig: SiteConfiguration) = 
@@ -14,8 +15,9 @@ type FrontpageExtractor(siteConfig: SiteConfiguration) =
         let writer = new DocumentWriter(scrappy, siteConfig.outPath)
 
         // TODO: how do we remove elements like .pagecount - ?
-        System.Threading.Tasks.Parallel.ForEach (documentLinks, fun (linkText, href) ->
+        Parallel.ForEach (documentLinks, fun (linkText, href) ->
             try
+                Console.ForegroundColor <- ConsoleColor.White
                 let doc = scrappy.load href
                 let rootContent = siteConfig.articleRootSelectors 
                                     |> Seq.map(fun selector -> doc.CssSelect(selector)) 

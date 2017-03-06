@@ -2,18 +2,18 @@
 
 open System.IO
 open NUnit.Framework
+open Lonsec.WebScrapper
 
 [<TestFixture>]
 type TriapartnersTest() = 
     inherit TestBase(
-        {
-            url = "http://www.triapartners.com/trialogue.php";
-            newslinkSelector = fun(url:string) -> true;
-            articleRootSelectors = [|".trialogue-details"|];
-            outPath = Path.GetTempPath() + "scrappy\\triapartners.com\\";
-            categories = [];
-        })
+        new SiteConfiguration(
+            "http://www.triapartners.com/trialogue.php",
+            Path.GetTempPath() + "scrappy\\",
+            (fun(url:string) -> true),
+            [|".trialogue-details"|])
+        )
 
-        [<Test>]
-        override this.downloadAll() = base.downloadAll()
+    [<Test>]
+    override this.downloadAll() = base.downloadAll()
             

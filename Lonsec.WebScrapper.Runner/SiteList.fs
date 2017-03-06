@@ -5,111 +5,85 @@ open Lonsec.WebScrapper
 
 module SiteList =
     
+    let root = Path.GetTempPath() + "scrappy\\";
+    type config = SiteConfiguration
+
     let all = [|
-        { 
-            url = "http://morningstar.com.au";
-            newslinkSelector = (fun(url:string) -> url.Contains("/article/"));
-            articleRootSelectors = [|".storyPageHolder"|];
-            outPath = Path.GetTempPath() + "scrappy\\morningstar.com.au\\";
-            categories = [];
-        };
-        { 
-            url = "http://morningstar.com.au/Funds";
-            newslinkSelector = (fun(url:string) -> url.Contains("/article/"));
-            articleRootSelectors = [|".storyPageHolder"|];
-            outPath = Path.GetTempPath() + "scrappy\\morningstar.com.au\\funds\\";
-            categories = [{ name = "Funds"; weight = 1.0 }];
-        };
-        { 
-            url = "http://moneymanagement.com.au/news";
-            newslinkSelector = (fun(url:string) -> url.Contains("/news/"));
-            articleRootSelectors = [|".cm-article-body"; ".News"|];
-            outPath = Path.GetTempPath() + "scrappy\\moneymanagement.com.au\\";
-            categories = [];
-        };
-        { 
-            url = "http://moneymanagement.com.au/funds-management";
-            newslinkSelector = (fun(url:string) -> url.Contains("/news/"));
-            articleRootSelectors = [|".cm-article-body"; ".News"|];
-            outPath = Path.GetTempPath() + "scrappy\\moneymanagement.com.au\\funds\\";
-            categories = [{ name = "funds"; weight = 1.0 }];
-        };
-        { 
-            url = "http://moneymanagement.com.au/news/financial-planning";
-            newslinkSelector = (fun(url:string) -> url.Contains("/news/"));
-            articleRootSelectors = [|".cm-article-body"; ".News"|];
-            outPath = Path.GetTempPath() + "scrappy\\moneymanagement.com.au\\financial-planning\\";
-            categories = [{ name = "financial-planning"; weight = 1.0 }];
-        };
-        { 
-            url = "http://moneymanagement.com.au/news/superannuation";
-            newslinkSelector = (fun(url:string) -> url.Contains("/news/"));
-            articleRootSelectors = [|".cm-article-body"; ".News"|];
-            outPath = Path.GetTempPath() + "scrappy\\moneymanagement.com.au\\superannuation\\";
-            categories = [{ name = "superannuation"; weight = 1.0 }];
-        };
-        { 
-            url = "http://moneymanagement.com.au/news/people-products";
-            newslinkSelector = (fun(url:string) -> url.Contains("/news/"));
-            articleRootSelectors = [|".cm-article-body"; ".News"|];
-            outPath = Path.GetTempPath() + "scrappy\\moneymanagement.com.au\\people-products\\";
-            categories = [{ name = "people-products"; weight = 1.0 }];
-        };
-        {
-            url = "http://www.investordaily.com.au/all-news";
-            newslinkSelector = fun(url:string) -> true;
-            articleRootSelectors = [|"article"|];
-            outPath = Path.GetTempPath() + "scrappy\\investordaily.com.au\\";
-            categories = [];
-        };
-        {
-            url = "http://www.investordaily.com.au/markets";
-            newslinkSelector = fun(url:string) -> true;
-            articleRootSelectors = [|"article"|];
-            outPath = Path.GetTempPath() + "scrappy\\investordaily.com.au\\markets";
-            categories = [{name = "markets"; weight = 1.0}];
-        };
-        {
-            url = "http://www.investordaily.com.au/regulation";
-            newslinkSelector = fun(url:string) -> true;
-            articleRootSelectors = [|"article"|];
-            outPath = Path.GetTempPath() + "scrappy\\investordaily.com.au\\regulation";
-            categories = [{name = "regulation"; weight = 1.0}];
-        };
-        {
-            url = "http://www.investordaily.com.au/appointments";
-            newslinkSelector = fun(url:string) -> true;
-            articleRootSelectors = [|"article"|];
-            outPath = Path.GetTempPath() + "scrappy\\investordaily.com.au\\appointments";
-            categories = [{name = "appointments"; weight = 1.0}];
-        };
-        {
-            url = "http://www.investordaily.com.au/superannuation";
-            newslinkSelector = fun(url:string) -> true;
-            articleRootSelectors = [|"article"|];
-            outPath = Path.GetTempPath() + "scrappy\\investordaily.com.au\\superannuation";
-            categories = [{name = "superannuation"; weight = 1.0}];
-        };
-        {
-            url = "http://www.investordaily.com.au/mergers-acquisitions";
-            newslinkSelector = fun(url:string) -> true;
-            articleRootSelectors = [|"article"|];
-            outPath = Path.GetTempPath() + "scrappy\\investordaily.com.au\\mergers-acquisitions";
-            categories = [{name = "mergers-acquisitions"; weight = 1.0}];
-        };
-        {
-            url = "https://cuffelinks.com.au";
-            newslinkSelector = fun(url:string) -> true;
-            articleRootSelectors = [|"article"|];
-            outPath = Path.GetTempPath() + "scrappy\\cuffelinks.com.au\\";
-            categories = [];
-        };
-        {
-            url = "http://www.triapartners.com/trialogue.php";
-            newslinkSelector = fun(url:string) -> true;
-            articleRootSelectors = [|".trialogue-details"|];
-            outPath = Path.GetTempPath() + "scrappy\\triapartners.com\\";
-            categories = [];
-        };
+
+        new config("http://morningstar.com.au", root, 
+                    (fun(url:string) -> url.Contains("/article/")), 
+                    [|".storyPageHolder"|]);
+
+        new config("http://morningstar.com.au/funds", root, 
+                    (fun(url:string) -> url.Contains("/article/")), 
+                    [|".storyPageHolder"|], 
+                    ["funds"]);
+
+        new config("http://moneymanagement.com.au/news", root, 
+                    (fun(url:string) -> url.Contains("/news/")), 
+                    [|".cm-article-body"; ".News"|]);
+
+        new config("http://moneymanagement.com.au/funds-management", root, 
+                    (fun(url:string) -> url.Contains("/news/")),
+                    [|".cm-article-body"; ".News"|], 
+                    ["funds"]);
+
+        new config("http://moneymanagement.com.au/financial-planning", root, 
+                    (fun(url:string) -> url.Contains("/news/")),
+                    [|".cm-article-body"; ".News"|], 
+                    ["financial-planning"]);
+
+        new config("http://moneymanagement.com.au/superannuation", root, 
+                    (fun(url:string) -> url.Contains("/news/")),
+                    [|".cm-article-body"; ".News"|], 
+                    ["superannuation"]);
+
+        new config("http://moneymanagement.com.au/people-products", root, 
+                    (fun(url:string) -> url.Contains("/news/")),
+                    [|".cm-article-body"; ".News"|], 
+                    ["people"; "products"]);
+
+        new config("http://moneymanagement.com.au/all-news", root, 
+                    (fun(url:string) -> url.Contains("/news/")), 
+                    [|"article"|]);
+
+        new config("http://moneymanagement.com.au/markets", root, 
+                    (fun(url:string) -> url.Contains("/news/")), 
+                    [|"article"|],
+                    ["markets"]);
+
+        new config("http://moneymanagement.com.au/regulation", root, 
+                    (fun(url:string) -> url.Contains("/news/")), 
+                    [|"article"|],
+                    ["regulation"]);
+
+        new config("http://moneymanagement.com.au/appointments", root, 
+                    (fun(url:string) -> url.Contains("/news/")), 
+                    [|"article"|],
+                    ["people"]);
+
+        new config("http://moneymanagement.com.au/appointments", root, 
+                    (fun(url:string) -> url.Contains("/news/")), 
+                    [|"article"|],
+                    ["people"]);
+
+        new config("http://moneymanagement.com.au/superannuation", root, 
+                    (fun(url:string) -> url.Contains("/news/")), 
+                    [|"article"|],
+                    ["superannuation"]);
+
+        new config("http://moneymanagement.com.au/mergers-acquisitions", root, 
+                    (fun(url:string) -> url.Contains("/news/")), 
+                    [|"article"|],
+                    ["mergers-acquisitions"]);
+
+        new config("https://cuffelinks.com.au", root, 
+                    (fun(url:string) -> true), 
+                    [|"article"|]);
+
+        new config("http://www.triapartners.com/trialogue.php", root, 
+                    (fun(url:string) -> true), 
+                    [|".trialogue-details"|]);
     |]
+
 

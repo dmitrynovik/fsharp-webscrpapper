@@ -51,6 +51,7 @@
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="IO.fs" />
     <Compile Include="SiteConfiguration.fs" />
     <Compile Include="DocumentScrapper.fs" />
     <Compile Include="DocumentWriter.fs" />

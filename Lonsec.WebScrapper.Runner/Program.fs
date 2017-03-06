@@ -9,7 +9,6 @@ let main argv =
 
     Lonsec.WebScrapper.Runner.SiteList.all |> Seq.iter (fun siteSettings -> 
 
-        Console.ForegroundColor <- ConsoleColor.White
         printf "processing %s\n" siteSettings.url 
 
         let extractor = new FrontpageExtractor(siteSettings)
@@ -17,12 +16,11 @@ let main argv =
             extractor.extractAll() |> ignore
         with
             | err -> 
-                Console.ForegroundColor <- ConsoleColor.Red
                 Trace.TraceError (err.ToString())
     )
     
     watch.Stop()
     let time = watch.Elapsed.ToString()
     printf "\n\nJob done, elapsed: %s" time  
-    Console.Read() |> ignore
+    //Console.Read() |> ignore
     0

@@ -2,4 +2,8 @@
 // for more guidance on F# programming.
 
 // Define your library scripting code here
+open System
 
+let uri = new Uri("http://www.morningstar.com.au/news")
+let host = uri.Host
+uri.LocalPath
