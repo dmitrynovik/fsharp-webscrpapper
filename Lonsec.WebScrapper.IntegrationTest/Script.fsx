@@ -6,4 +6,4 @@ open System
 
 let uri = new Uri("http://www.morningstar.com.au/news")
 let host = uri.Host
-uri.LocalPath
+uri.Host + uri.LocalPath
