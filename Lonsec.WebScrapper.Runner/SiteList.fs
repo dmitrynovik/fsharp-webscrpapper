@@ -5,83 +5,78 @@ open Lonsec.WebScrapper
 
 module SiteList =
     
-    let root = Path.GetTempPath() + "scrappy\\";
     type config = SiteConfiguration
+    let fsRoot = Path.GetTempPath() + "scrappy\\";
 
     let all = [|
 
-        new config("http://morningstar.com.au", root, 
+        new config("http://morningstar.com.au", fsRoot, 
                     (fun(url:string) -> url.Contains("/article/")), 
                     [|".storyPageHolder"|]);
 
-        new config("http://morningstar.com.au/funds", root, 
+        new config("http://morningstar.com.au/funds", fsRoot, 
                     (fun(url:string) -> url.Contains("/article/")), 
                     [|".storyPageHolder"|], 
-                    ["funds"]);
+                    [Funds]);
 
-        new config("http://moneymanagement.com.au/news", root, 
+        new config("http://moneymanagement.com.au/news", fsRoot, 
                     (fun(url:string) -> url.Contains("/news/")), 
                     [|".cm-article-body"; ".News"|]);
 
-        new config("http://moneymanagement.com.au/funds-management", root, 
+        new config("http://moneymanagement.com.au/funds-management", fsRoot, 
                     (fun(url:string) -> url.Contains("/news/")),
                     [|".cm-article-body"; ".News"|], 
-                    ["funds"]);
+                    [Funds]);
 
-        new config("http://moneymanagement.com.au/financial-planning", root, 
+        new config("http://moneymanagement.com.au/financial-planning", fsRoot, 
                     (fun(url:string) -> url.Contains("/news/")),
                     [|".cm-article-body"; ".News"|], 
-                    ["financial-planning"]);
+                    [FinancialPlanning]);
 
-        new config("http://moneymanagement.com.au/superannuation", root, 
+        new config("http://moneymanagement.com.au/superannuation", fsRoot, 
                     (fun(url:string) -> url.Contains("/news/")),
                     [|".cm-article-body"; ".News"|], 
-                    ["superannuation"]);
+                    [Superannuation]);
 
-        new config("http://moneymanagement.com.au/people-products", root, 
+        new config("http://moneymanagement.com.au/people-products", fsRoot, 
                     (fun(url:string) -> url.Contains("/news/")),
                     [|".cm-article-body"; ".News"|], 
-                    ["people"; "products"]);
+                    [People; Products]);
 
-        new config("http://moneymanagement.com.au/all-news", root, 
+        new config("http://moneymanagement.com.au/all-news", fsRoot, 
                     (fun(url:string) -> url.Contains("/news/")), 
                     [|"article"|]);
 
-        new config("http://moneymanagement.com.au/markets", root, 
+        new config("http://moneymanagement.com.au/markets", fsRoot, 
                     (fun(url:string) -> url.Contains("/news/")), 
                     [|"article"|],
-                    ["markets"]);
+                    [Markets]);
 
-        new config("http://moneymanagement.com.au/regulation", root, 
+        new config("http://moneymanagement.com.au/regulation", fsRoot, 
                     (fun(url:string) -> url.Contains("/news/")), 
                     [|"article"|],
-                    ["regulation"]);
+                    [Regulation]);
 
-        new config("http://moneymanagement.com.au/appointments", root, 
+        new config("http://moneymanagement.com.au/appointments", fsRoot, 
                     (fun(url:string) -> url.Contains("/news/")), 
                     [|"article"|],
-                    ["people"]);
+                    [People]);
 
-        new config("http://moneymanagement.com.au/appointments", root, 
+        new config("http://moneymanagement.com.au/superannuation", fsRoot, 
                     (fun(url:string) -> url.Contains("/news/")), 
                     [|"article"|],
-                    ["people"]);
+                    [Superannuation]);
 
-        new config("http://moneymanagement.com.au/superannuation", root, 
+        new config("http://moneymanagement.com.au/mergers-acquisitions", fsRoot, 
                     (fun(url:string) -> url.Contains("/news/")), 
                     [|"article"|],
-                    ["superannuation"]);
+                    [MergersAndAcquisitions]);
 
-        new config("http://moneymanagement.com.au/mergers-acquisitions", root, 
-                    (fun(url:string) -> url.Contains("/news/")), 
-                    [|"article"|],
-                    ["mergers-acquisitions"]);
-
-        new config("https://cuffelinks.com.au", root, 
+        new config("https://cuffelinks.com.au", fsRoot, 
                     (fun(url:string) -> true), 
                     [|"article"|]);
 
-        new config("http://www.triapartners.com/trialogue.php", root, 
+        new config("http://www.triapartners.com/trialogue.php", fsRoot, 
                     (fun(url:string) -> true), 
                     [|".trialogue-details"|]);
     |]
