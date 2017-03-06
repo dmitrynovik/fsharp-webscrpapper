@@ -9,28 +9,39 @@ type Topic = Funds | FinancialPlanning | Superannuation | People | Products | Ma
 
 type Category(name: Topic, weight: float) =
     static member Of(name: Topic) = Category(name, 1.0)
+    static member Of(name: Topic, weight: float) = Category(name, weight)
 
-type SiteConfiguration(url: string, fsRoot: string, newslinkSelector: string -> bool, articleRootSelectors: seq<string>, categories: seq<Category>) =    
+type ChildPage = { path: string; categories: seq<Category>; }
+
+type SiteConfiguration(url: string, 
+                        fsRoot: string, 
+                        newslinkSelector: string -> bool, 
+                        articleRootSelectors: seq<string>, 
+                        [<Optional;DefaultParameterValue(null)>] ?children: List<ChildPage>) =
 
     member this.url = url
     member this.newslinkSelector = newslinkSelector
     member this.articleRootSelectors = articleRootSelectors
-    member this.categories = categories
 
-    member this.outPath = 
+    member this.outPath(): string = 
         let uri = new Uri(url)
-        let path = IO.removeInvalidCharsFromFileName(uri.Host) + "/" + IO.removeInvalidCharsFromFileName(uri.LocalPath)
-        Path.Combine(fsRoot, path)
+        if (fsRoot.Contains(uri.Host)) then
+            fsRoot
+        else
+            let path = IO.removeInvalidCharsFromFileName(uri.Host) + "\\" + IO.removeInvalidCharsFromFileName(uri.LocalPath)
+            Path.Combine(fsRoot, path)
 
-    new(url: string, fsRoot: string, newslinkSelector: string -> bool, articleRootSelectors: seq<string>, 
-        [<Optional;DefaultParameterValue(null)>] ?categories: List<Topic>) =
+    member this.children = match children with
+                            | Some(x) -> x |> List.map (
+                                                        fun i -> 
+                                                                    let path = this.outPath().TrimEnd('\\') + "\\" + i.path.TrimStart('/')
+                                                                    
+                                                                    new SiteConfiguration(url.TrimEnd('/') + "/" + i.path.TrimStart('/'), 
+                                                                        path, 
+                                                                        newslinkSelector, 
+                                                                        articleRootSelectors)
+                                                       )
+                            | None -> [] 
 
-        let cats = match categories with
-                    | Some(c) -> c
-                    | None -> []
-                                    
-        let count = cats.Count()
-        let weightedCats = cats |> Seq.map(fun i -> new Category(i, 1.0 / (float) count))
-        SiteConfiguration(url, fsRoot, newslinkSelector, articleRootSelectors, weightedCats)
 
 

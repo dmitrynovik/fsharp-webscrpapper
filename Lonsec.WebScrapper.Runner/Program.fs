@@ -5,11 +5,10 @@ open Lonsec.WebScrapper
 [<EntryPoint>]
 let main argv = 
     
+    Console.ForegroundColor <- ConsoleColor.White
     let watch = Stopwatch.StartNew()
 
     Lonsec.WebScrapper.Runner.SiteList.all |> Seq.iter (fun siteSettings -> 
-
-        printf "processing %s\n" siteSettings.url 
 
         let extractor = new FrontpageExtractor(siteSettings)
         try

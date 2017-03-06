@@ -12,65 +12,32 @@ module SiteList =
 
         new config("http://morningstar.com.au", fsRoot, 
                     (fun(url:string) -> url.Contains("/article/")), 
-                    [|".storyPageHolder"|]);
-
-        new config("http://morningstar.com.au/funds", fsRoot, 
-                    (fun(url:string) -> url.Contains("/article/")), 
-                    [|".storyPageHolder"|], 
-                    [Funds]);
+                    [|".storyPageHolder"|],
+                    [{ path = "/funds"; categories = [Category.Of(Funds)] };]
+                  );
 
         new config("http://moneymanagement.com.au/news", fsRoot, 
                     (fun(url:string) -> url.Contains("/news/")), 
-                    [|".cm-article-body"; ".News"|]);
+                    [|".cm-article-body"; ".News"|],
+                    [
+                        { path = "/funds-management"; categories = [Category.Of(Funds)] };
+                        { path = "/financial-planning"; categories = [Category.Of(FinancialPlanning)] };
+                        { path = "/superannuation"; categories = [Category.Of(Superannuation)] };
+                        { path = "/people-products"; categories = [Category.Of(People, 0.5); Category.Of(Products, 0.5)] };
+                    ]
+                  );
 
-        new config("http://moneymanagement.com.au/funds-management", fsRoot, 
-                    (fun(url:string) -> url.Contains("/news/")),
-                    [|".cm-article-body"; ".News"|], 
-                    [Funds]);
-
-        new config("http://moneymanagement.com.au/financial-planning", fsRoot, 
-                    (fun(url:string) -> url.Contains("/news/")),
-                    [|".cm-article-body"; ".News"|], 
-                    [FinancialPlanning]);
-
-        new config("http://moneymanagement.com.au/superannuation", fsRoot, 
-                    (fun(url:string) -> url.Contains("/news/")),
-                    [|".cm-article-body"; ".News"|], 
-                    [Superannuation]);
-
-        new config("http://moneymanagement.com.au/people-products", fsRoot, 
-                    (fun(url:string) -> url.Contains("/news/")),
-                    [|".cm-article-body"; ".News"|], 
-                    [People; Products]);
-
-        new config("http://moneymanagement.com.au/all-news", fsRoot, 
-                    (fun(url:string) -> url.Contains("/news/")), 
-                    [|"article"|]);
-
-        new config("http://moneymanagement.com.au/markets", fsRoot, 
-                    (fun(url:string) -> url.Contains("/news/")), 
-                    [|"article"|],
-                    [Markets]);
-
-        new config("http://moneymanagement.com.au/regulation", fsRoot, 
-                    (fun(url:string) -> url.Contains("/news/")), 
-                    [|"article"|],
-                    [Regulation]);
-
-        new config("http://moneymanagement.com.au/appointments", fsRoot, 
-                    (fun(url:string) -> url.Contains("/news/")), 
-                    [|"article"|],
-                    [People]);
-
-        new config("http://moneymanagement.com.au/superannuation", fsRoot, 
-                    (fun(url:string) -> url.Contains("/news/")), 
-                    [|"article"|],
-                    [Superannuation]);
-
-        new config("http://moneymanagement.com.au/mergers-acquisitions", fsRoot, 
-                    (fun(url:string) -> url.Contains("/news/")), 
-                    [|"article"|],
-                    [MergersAndAcquisitions]);
+          new config("http://www.investordaily.com.au", fsRoot,
+                        (fun(url:string) -> true),
+                        [|"article"|],
+                        [
+                            { path = "/all-news"; categories = [] };
+                            { path = "/markets"; categories = [Category.Of(Markets)] };
+                            { path = "/regulation"; categories = [Category.Of(Regulation)] };
+                            { path = "/appointments"; categories = [Category.Of(People)] };
+                            { path = "/mergers-acquisitions"; categories = [Category.Of(MergersAndAcquisitions)] };
+                        ]
+                     );
 
         new config("https://cuffelinks.com.au", fsRoot, 
                     (fun(url:string) -> true), 
