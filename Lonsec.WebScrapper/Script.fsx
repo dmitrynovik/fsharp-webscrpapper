@@ -2,7 +2,7 @@
 // for more guidance on F# programming.
 
 //#load "DocumentScrapper.fs"
-//open Lonsec.WebScrapper
+//open WebScrapper.FSharp
 
 // Define your library scripting code here
 

@@ -1,8 +1,8 @@
-﻿namespace Lonsec.WebScrapper.IntegrationTest
+﻿namespace WebScrapper.FSharp.IntegrationTest
 
 open System.IO
 open NUnit.Framework
-open Lonsec.WebScrapper
+open WebScrapper.FSharp
 
 [<TestFixture>]
 type InvestorDailyNewsTest() = 

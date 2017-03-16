@@ -1,7 +1,7 @@
-﻿namespace Lonsec.WebScrapper.Runner
+﻿namespace WebScrapper.FSharp.Runner
 
 open System.IO
-open Lonsec.WebScrapper
+open WebScrapper.FSharp
 
 module SiteList =
     

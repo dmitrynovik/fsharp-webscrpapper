@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Lonsec.WebScrapper", "Lonsec.WebScrapper\Lonsec.WebScrapper.fsproj", "{A64A0DA4-1F8B-4D09-B8D3-BE7856375E38}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebScrapper.FSharp", "Lonsec.WebScrapper\WebScrapper.FSharp.fsproj", "{A64A0DA4-1F8B-4D09-B8D3-BE7856375E38}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Lonsec.WebScrapper.Runner", "Lonsec.WebScrapper.Runner\Lonsec.WebScrapper.Runner.fsproj", "{CD1553A8-39E9-4CD8-AD24-3735422F826B}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebScrapper.FSharp.Runner", "Lonsec.WebScrapper.Runner\WebScrapper.FSharp.Runner.fsproj", "{CD1553A8-39E9-4CD8-AD24-3735422F826B}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Lonsec.WebScrapper.IntegrationTest", "Lonsec.WebScrapper.IntegrationTest\Lonsec.WebScrapper.IntegrationTest.fsproj", "{5AB5C238-0541-443E-84E9-7CC053F0962C}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebScrapper.FSharp.IntegrationTests", "Lonsec.WebScrapper.IntegrationTest\WebScrapper.FSharp.IntegrationTests.fsproj", "{5AB5C238-0541-443E-84E9-7CC053F0962C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

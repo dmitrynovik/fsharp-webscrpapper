@@ -1,4 +1,4 @@
-﻿namespace Lonsec.WebScrapper.Runner.AssemblyInfo
+﻿namespace WebScrapper.FSharp.Runner.AssemblyInfo
 
 open System.Reflection
 open System.Runtime.CompilerServices
@@ -7,11 +7,11 @@ open System.Runtime.InteropServices
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[<assembly: AssemblyTitle("Lonsec.WebScrapper.Runner")>]
+[<assembly: AssemblyTitle("WebScrapper.FSharp.Runner")>]
 [<assembly: AssemblyDescription("")>]
 [<assembly: AssemblyConfiguration("")>]
 [<assembly: AssemblyCompany("")>]
-[<assembly: AssemblyProduct("Lonsec.WebScrapper.Runner")>]
+[<assembly: AssemblyProduct("WebScrapper.FSharp.Runner")>]
 [<assembly: AssemblyCopyright("Copyright ©  2017")>]
 [<assembly: AssemblyTrademark("")>]
 [<assembly: AssemblyCulture("")>]

@@ -1,6 +1,6 @@
 ﻿open System
 open System.Diagnostics
-open Lonsec.WebScrapper
+open WebScrapper.FSharp
 
 [<EntryPoint>]
 let main argv = 
@@ -8,7 +8,7 @@ let main argv =
     Console.ForegroundColor <- ConsoleColor.White
     let watch = Stopwatch.StartNew()
 
-    Lonsec.WebScrapper.Runner.SiteList.all |> Seq.iter (fun siteSettings -> 
+    WebScrapper.FSharp.Runner.SiteList.all |> Seq.iter (fun siteSettings -> 
 
         let extractor = new FrontpageExtractor(siteSettings)
         try

@@ -1,7 +1,7 @@
-﻿namespace Lonsec.WebScrapper.IntegrationTest
+﻿namespace WebScrapper.FSharp.IntegrationTest
 
 open System.Diagnostics
-open Lonsec.WebScrapper
+open WebScrapper.FSharp
 
 [<AbstractClass>]
 type TestBase(siteConfig: SiteConfiguration) =

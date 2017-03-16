@@ -1,4 +1,4 @@
-﻿namespace Lonsec.WebScrapper
+﻿namespace WebScrapper.FSharp
 
 open System
 open System.IO
