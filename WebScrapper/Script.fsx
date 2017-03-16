@@ -5,7 +5,3 @@
 //open WebScrapper.FSharp
 
 // Define your library scripting code here
-
-type Color = Red=0 | Blue=1
-
-Color.Blue
