@@ -75,7 +75,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lonsec.WebScrapper\WebScrapper.FSharp.fsproj">
+    <ProjectReference Include="..\WebScrapper\WebScrapper.FSharp.fsproj">
       <Name>WebScrapper.FSharp</Name>
       <Project>{a64a0da4-1f8b-4d09-b8d3-be7856375e38}</Project>
       <Private>True</Private>
